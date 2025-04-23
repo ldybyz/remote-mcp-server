@@ -18,7 +18,7 @@ export class MyMCP extends McpAgent {
 }
 
 // Export the OAuth handler as the default
-export default new OAuthProvider({
+/**export default new OAuthProvider({
 	apiRoute: "/sse",
 	// TODO: fix these types
 	// @ts-ignore
@@ -29,3 +29,4 @@ export default new OAuthProvider({
 	tokenEndpoint: "/token",
 	clientRegistrationEndpoint: "/register",
 });
+*/
