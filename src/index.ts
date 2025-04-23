@@ -1,8 +1,15 @@
-import app from "./app";
+// import app from "./app";
 import { McpAgent } from "agents/mcp";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
+import { Hono } from "hono";
 import OAuthProvider from "@cloudflare/workers-oauth-provider";
+
+type Bindings = Env;
+
+const app = new Hono<{
+	Bindings: Bindings;
+}>();
 
 export class MyMCP extends McpAgent {
 	server = new McpServer({
@@ -30,3 +37,10 @@ export class MyMCP extends McpAgent {
 	clientRegistrationEndpoint: "/register",
 });
 */
+
+app.mount("/", (req, env, ctx) => {
+
+	return MyMCP.mount("/sse").fetch(req, env, ctx);
+});
+
+export default app;
